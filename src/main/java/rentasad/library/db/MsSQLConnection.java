@@ -172,8 +172,8 @@ public class MsSQLConnection
      * @return the connection
      * @throws SQLException
      */
-    public Connection getConnection() throws SQLException
-    {
+    public Connection getConnection() throws SQLException, ClassNotFoundException
+	{
         if (this.connection.isValid(4))
         {
             return this.connection;
@@ -184,8 +184,8 @@ public class MsSQLConnection
         }
     }
 
-    public static boolean isInit() throws SQLException
-    {
+    public static boolean isInit() throws SQLException, ClassNotFoundException
+	{
         if (instance != null)
         {
 			return instance.getConnection() != null;
