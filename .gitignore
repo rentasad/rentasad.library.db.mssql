@@ -1,0 +1,15 @@
+target/
+# IntelliJ IDEA
+.idea/*
+!.idea/inspectionProfiles
+!.idea/codeStyles
+!.idea/vcs.xml
+!.idea/runConfigurations
+!.idea/modules.xml
+vcs.xml
+
+# Dateien, die nicht versioniert werden sollten
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/libraries

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>rentasad.library</groupId>
+	<artifactId>rentasad.library.db.mssql</artifactId>
+	<version>3.0.0</version>
+	<name>rentasad.library.db.mssql</name>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<!-- DEPENDENCIES VERSIONS -->
+		<maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
+		<maven-resources-plugin.version>3.4.0</maven-resources-plugin.version>
+		<maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
+		<maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
+		<maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
+		<maven-install-plugin.version>3.1.4</maven-install-plugin.version>
+		<maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
+		<maven-site-plugin.version>3.21.0</maven-site-plugin.version>
+		<maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
+		<project.java.version>17</project.java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.10.3</version>
+			<scope>test</scope>
+		</dependency>
+<!--		&lt;!&ndash; https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>com.microsoft.sqlserver</groupId>-->
+<!--			<artifactId>mssql-jdbc</artifactId>-->
+<!--			<version>11.2.2.jre17</version>-->
+<!--		</dependency>-->
+		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>13.2.1.jre11</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.24</version>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<pluginManagement>
+			<!-- lock down plugins versions to avoid using Maven defaults (may be
+                moved to parent pom) -->
+			<plugins>
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>3.7.1</version>
+					<configuration>
+						<archive>
+							<manifest>
+								<mainClass>
+									gustini.gustini.library.vs4.middleware.jobs.IntegrationStarter.IntegrationStarterJob
+								</mainClass>
+							</manifest>
+						</archive>
+						<descriptorRefs>
+							<descriptorRef>jar-with-dependencies</descriptorRef>
+						</descriptorRefs>
+					</configuration>
+					<executions>
+						<execution>
+							<id>make-assembly</id> <!-- this is used for inheritance merges -->
+							<phase>package</phase> <!-- append to the packaging phase -->
+							<goals>
+								<goal>single</goal> <!-- goals == mojos -->
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.projectlombok</groupId>
+					<artifactId>lombok-maven-plugin</artifactId>
+					<version>1.18.20.0</version>
+					<executions>
+						<execution>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>delombok</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${maven-clean-plugin.version}</version>
+				</plugin>
+				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+					<configuration>
+						<encoding>CP1252</encoding>
+						<source>${project.java.version}</source>
+						<target>${project.java.version}</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+					<configuration>
+						<argLine>-Dfile.encoding=CP1252</argLine>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${maven-jar-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${maven-install-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${maven-deploy-plugin.version}</version>
+				</plugin>
+				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${maven-site-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>${maven-project-info-reports-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>flatten-maven-plugin</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<updatePomFile>true</updatePomFile>
+					</configuration>
+					<executions>
+						<execution>
+							<id>flatten</id>
+							<phase>process-resources</phase>
+							<goals>
+								<goal>flatten</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>flatten.clean</id>
+							<phase>clean</phase>
+							<goals>
+								<goal>clean</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
